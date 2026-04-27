@@ -114,6 +114,14 @@
   p{margin-bottom:16px;}
   p:last-child{margin-bottom:0;}
   strong{color:var(--ink);font-weight:700;}
+  /* hero上では strong を白にする */
+  .hero strong{color:var(--white);}
+  .hero-sub strong{color:var(--white);}
+  /* スマホではタイトル内の改行を消す */
+  .sp-hide{display:none;}
+  @media (min-width:640px){
+    .sp-hide{display:block;}
+  }
   .red{color:var(--red);font-weight:700;}
 
   /* Lead text */
@@ -772,8 +780,8 @@
       <div class="tb-name">Hanse Mono</div>
     </div>
     <div class="hero-caption">MENSHOW KAMINOTE / OPERATION UPDATE / FOR STAFF</div>
-    <h1 class="hero-title">麺昇 神の手<br>1周年感謝祭・LINEショップカード運用ガイド</h1>
-    <p class="hero-sub">5月の1周年感謝祭にあわせて、LINEショップカードを新しく始めます。<br>「QRの渡し方」「クーポンの確認」が今までと少し違うので、まずはこの紙にぜんぶ書いてあります。<br><strong>暗記しなくていい・困ったらここを見ればOK。</strong>4週間、みんなで楽しく回しましょう。</p>
+    <h1 class="hero-title">麺昇 神の手<br class="sp-hide">1周年感謝祭・LINEショップカード運用ガイド</h1>
+    <p class="hero-sub">5月の1周年感謝祭にあわせて、LINEショップカードを新しく始めます。「QRの渡し方」「クーポンの確認」が今までと少し違うので、まずはこの紙にぜんぶ書いてあります。<strong>暗記しなくていい・困ったらここを見ればOK。</strong> 4週間、みんなで楽しく回しましょう。</p>
 
     <div class="hero-meta">
       <div>Issue Date<b>2026.04.27</b></div>
@@ -1452,7 +1460,7 @@
   <div class="wrap">
     <div class="meta">
       <div>Document<br><b>1周年感謝祭・ショップカード運用ガイド</b></div>
-      <div>Issued<br><b>2026.04.27 / v2.2</b></div>
+      <div>Issued<br><b>2026.04.27 / v2.3</b></div>
       <div>Pen Name<br><b>Hanse Mono</b></div>
     </div>
     <div style="margin-top:28px;padding-top:24px;border-top:1px solid #2a2a2a;">
