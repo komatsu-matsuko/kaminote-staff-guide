@@ -395,8 +395,7 @@
 
   /* Anchor links list */
   .toc{
-    background:var(--white);border:1px solid var(--gray-4);
-    padding:20px 22px;margin:32px 0 0;
+    display:none;
   }
   .toc-label{
     font-size:10px;letter-spacing:0.18em;text-transform:uppercase;
@@ -566,6 +565,96 @@
   @media (min-width:640px){
     .linecards-row{grid-template-columns:repeat(4,1fr);}
   }
+
+  /* Changelog toggle */
+  .changelog{
+    margin:32px 0 0;
+    border:1px solid var(--gray-4);
+    background:var(--white);
+  }
+  .changelog-head{
+    padding:14px 18px;
+    display:flex;align-items:center;gap:10px;
+    font-size:12px;letter-spacing:0.12em;
+    color:var(--gray-1);font-weight:700;text-transform:uppercase;
+    border-bottom:1px solid var(--gray-4);
+  }
+  .changelog-body{
+    padding:4px 0;
+  }
+  /* 各エントリ：<details>でドロワー化 */
+  .cl-entry{
+    border-bottom:1px dashed var(--gray-3);
+    font-size:13px;line-height:1.75;
+  }
+  .cl-entry:last-child{border-bottom:0;}
+  .cl-entry summary{
+    list-style:none;cursor:pointer;
+    padding:12px 20px;
+    display:flex;align-items:center;flex-wrap:wrap;gap:8px;
+    user-select:none;
+  }
+  .cl-entry summary::-webkit-details-marker{display:none;}
+  .cl-entry summary:hover{background:var(--gray-5);}
+  .cl-entry-arrow{
+    margin-left:auto;font-size:10px;color:var(--gray-2);
+    transition:transform 0.2s;flex-shrink:0;
+  }
+  .cl-entry[open] .cl-entry-arrow{transform:rotate(90deg);}
+  .cl-entry-title{
+    font-size:13px;font-weight:700;color:var(--ink);
+    flex:1 1 200px;
+  }
+  .cl-entry-body{
+    padding:12px 20px 16px;
+    border-top:1px solid var(--gray-5);
+    background:var(--gray-5);
+  }
+  .cl-meta{
+    display:flex;align-items:center;flex-wrap:wrap;gap:8px;
+    flex-shrink:0;
+  }
+  .cl-date{
+    font-family:'SF Mono','Consolas',monospace;
+    font-size:11px;letter-spacing:0.1em;color:var(--gray-1);
+  }
+  .cl-author{
+    font-size:11px;font-weight:700;color:var(--white);
+    background:var(--ink);padding:2px 8px;border-radius:2px;
+  }
+  .cl-tag{
+    font-size:10px;letter-spacing:0.14em;text-transform:uppercase;
+    background:var(--red-soft);color:var(--red);
+    padding:2px 8px;border-radius:2px;font-weight:700;
+  }
+  .cl-tag.add{background:#f0faf4;color:#0a7c3c;}
+  .cl-diff{
+    margin-top:8px;
+    font-size:12.5px;line-height:1.8;
+  }
+  .cl-diff .before{
+    background:#fff5f5;border-left:3px solid #f3a0a0;
+    padding:8px 12px;color:var(--ink-3);margin-bottom:4px;
+  }
+  .cl-diff .after{
+    background:#f0faf4;border-left:3px solid #6dcf95;
+    padding:8px 12px;color:var(--ink-3);
+  }
+  .cl-diff .label{
+    font-size:10px;letter-spacing:0.14em;font-weight:700;
+    text-transform:uppercase;margin-bottom:4px;
+  }
+  .cl-diff .before .label{color:#c0392b;}
+  .cl-diff .after .label{color:#0a7c3c;}
+  .cl-jump{
+    display:inline-flex;align-items:center;gap:6px;
+    background:var(--ink);color:var(--white);
+    font-size:11px;letter-spacing:0.12em;font-weight:700;
+    padding:6px 14px;border-radius:2px;text-decoration:none;
+    margin-top:12px;
+  }
+  .cl-jump:hover{background:var(--red);color:var(--white);}
+  .cl-jump svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
 
   /* QR scene photo */
   .qr-scene-photo{
@@ -804,10 +893,80 @@
       <li><a href="#s4">ショップカードの仕組み</a><span class="arr"><svg class="icon"><use href="#i-arrow-right"/></svg></span></li>
       <li><a href="#s5">スタッフのQR運用フロー</a><span class="arr"><svg class="icon"><use href="#i-arrow-right"/></svg></span></li>
       <li><a href="#s6">クーポンの取り扱い</a><span class="arr"><svg class="icon"><use href="#i-arrow-right"/></svg></span></li>
-      <li><a href="#s7">接客トーク台本</a><span class="arr"><svg class="icon"><use href="#i-arrow-right"/></svg></span></li>
-      <li><a href="#s8">よくある質問</a><span class="arr"><svg class="icon"><use href="#i-arrow-right"/></svg></span></li>
+      <li><a href="#s7">キャンペーン期間のスタッフオペレーション</a><span class="arr"><svg class="icon"><use href="#i-arrow-right"/></svg></span></li>
+      <li><a href="#s8">接客トーク台本</a><span class="arr"><svg class="icon"><use href="#i-arrow-right"/></svg></span></li>
+      <li><a href="#s9">よくある質問</a><span class="arr"><svg class="icon"><use href="#i-arrow-right"/></svg></span></li>
     </ol>
   </nav>
+</div>
+
+<div class="wrap">
+  <!-- CHANGELOG -->
+  <div class="changelog">
+    <div class="changelog-head">
+      <svg class="icon" style="color:var(--red);"><use href="#i-info"/></svg>
+      更新履歴
+      <span style="font-size:11px;color:var(--gray-2);font-weight:500;text-transform:none;letter-spacing:0;">— 直近の修正内容はここで確認できます ▶</span>
+    </div>
+    <div class="changelog-body">
+
+      <!-- Entry 1 -->
+      <details class="cl-entry">
+        <summary>
+          <div class="cl-meta">
+            <span class="cl-date">2026-04-28</span>
+            <span class="cl-author">火山さん</span>
+            <span class="cl-tag">修正</span>
+          </div>
+          <div class="cl-entry-title">Section 08 — STEP 1 接客台本テキストの差し替え</div>
+          <span class="cl-entry-arrow">▶</span>
+        </summary>
+        <div class="cl-entry-body">
+          <div class="cl-diff">
+            <div class="before">
+              <div class="label">⛔ 変更前（旧テキスト）</div>
+              「ありがとうございます。<br>今月、LINEのショップカードが始まりまして、今日登録するだけで<strong>今日分の特典がもらえます。</strong><br>今週は（今週の特典）になってるので、よければ今日どうぞ！」
+            </div>
+            <div class="after" style="margin-top:6px;">
+              <div class="label">✅ 変更後（新テキスト）</div>
+              「ありがとうございます。<br><strong>１周年を記念してLINEショップカードを始めました。</strong>今日登録するだけで<strong>今日分のポイントも貯まりますし、期間限定のクーポンも使用できます。</strong>よければ今日登録していきますか？」
+            </div>
+          </div>
+          <p style="font-size:12px;color:var(--gray-1);margin-top:8px;margin-bottom:12px;">理由：「ポイントが貯まる」と「期間限定クーポンが使える」の2つのメリットを明示することで、お客様に価値が伝わりやすくなる。</p>
+          <a href="#s8" class="cl-jump">
+            <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+            Section 08「接客トーク台本」へ飛ぶ
+          </a>
+        </div>
+      </details>
+
+      <!-- Entry 2 -->
+      <details class="cl-entry">
+        <summary>
+          <div class="cl-meta">
+            <span class="cl-date">2026-04-28</span>
+            <span class="cl-author">火山さん</span>
+            <span class="cl-tag add">追加</span>
+          </div>
+          <div class="cl-entry-title">Section 07（新規）— キャンペーン期間のスタッフオペレーション追加</div>
+          <span class="cl-entry-arrow">▶</span>
+        </summary>
+        <div class="cl-entry-body">
+          <div class="cl-diff">
+            <div class="after">
+              <div class="label">✅ 追加内容</div>
+              注文までの流れ（来店→クーポン確認→LINE誘導→登録礼→使用済確認→エアレジ対応）と会計時の3チェック（割引確認・ポイント付与・お帰りひと声）をオペレーションセクションとして新規追加。「どんなに忙しくても、ゆっくり目を見てお伝えすること」の徹底事項も明記。
+            </div>
+          </div>
+          <a href="#s7" class="cl-jump" style="margin-top:12px;">
+            <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+            Section 07「スタッフオペレーション」へ飛ぶ
+          </a>
+        </div>
+      </details>
+
+    </div>
+  </div>
 </div>
 
 <!-- SECTION 01: GOAL & MISSION -->
@@ -1002,19 +1161,18 @@
         <span class="lc-name">ORANGE：味噌/辛味噌/醤油 1杯無料</span>
       </div>
       <div class="lc-item">
-        <img src="linecard-red.png" alt="REDランク 20スタンプ">
-        <span class="lc-tier red">20 STAMPS</span>
+        <img src="linecard-red.png" alt="REDランク 15スタンプ">
+        <span class="lc-tier red">15 STAMPS</span>
         <span class="lc-name">RED：トッピング1年無料</span>
       </div>
       <div class="lc-item">
-        <img src="linecard-black.png" alt="BLACKランク 30スタンプ">
-        <span class="lc-tier black">30 STAMPS</span>
+        <img src="linecard-black.png" alt="BLACKランク 20スタンプ">
+        <span class="lc-tier black">20 STAMPS</span>
         <span class="lc-name">BLACK：トッピング1年無料</span>
       </div>
     </div>
 
     <h3 style="margin-top:8px;">常時運用：4ランクのスタンプ特典</h3>
-    <p>キャンペーン後も継続するベースのランク制度です。ランクを上げるたびに特典がアンロックされ、<strong>スタンプは累積</strong> していきます（ランクが上がると過去のランクが消えるわけではありません）。</p>
 
     <div class="tiers" role="table" aria-label="ランク特典">
       <div class="tier">
@@ -1032,14 +1190,14 @@
         </div>
       </div>
       <div class="tier">
-        <div class="tier-stamp"><span class="n">20</span><span class="l">RED</span></div>
+        <div class="tier-stamp"><span class="n">15</span><span class="l">RED</span></div>
         <div class="tier-body">
           <div class="tier-reward">1年間、毎回トッピング1品無料</div>
           <div class="tier-note">上限180円まで / ご来店ごとに1品サービス</div>
         </div>
       </div>
       <div class="tier">
-        <div class="tier-stamp"><span class="n">30</span><span class="l">BLACK</span></div>
+        <div class="tier-stamp"><span class="n">20</span><span class="l">BLACK</span></div>
         <div class="tier-body">
           <div class="tier-reward">1年間、毎回トッピング1品無料 ＋ 他クーポン併用可</div>
           <div class="tier-note">上限300円まで / 究極の特権</div>
@@ -1086,6 +1244,67 @@
     <div class="highlight">
       <div class="h-label"><svg class="icon"><use href="#i-bolt"/></svg>覚えておくポイント</div>
       <p><strong>ショップカード自体は無期限で継続</strong>。キャンペーンが終わっても貯めたスタンプは消えません。<strong class="red">5月のあいだだけ +α 特別特典が乗る</strong> ぶんだけ、お客様にとってお得な期間ということ。「いまのうちに通うとお得ですよ」と添えて案内できると◎。</p>
+    </div>
+
+    <!-- お客様画面の見本 -->
+    <h3 style="margin-top:40px;">📱 お客様の画面イメージ（スタッフ確認用）</h3>
+    <p>スタンプが一定数に達すると、<strong>通常特典</strong>と<strong class="red">5月限定 +α特典</strong>の<strong>2種類が同時に</strong>もらえます。お客様の画面に「QRコードをスキャン」ボタンが出ていたら対応してください。</p>
+
+    <div style="display:flex;gap:20px;flex-wrap:wrap;margin-top:20px;">
+
+      <!-- 5スタンプ -->
+      <div style="flex:1;min-width:260px;background:#f9f9f9;border-radius:12px;padding:16px;border:2px solid #a5d6a7;">
+        <div style="font-size:12px;font-weight:700;letter-spacing:0.1em;color:#2e7d32;background:#e8f5e9;display:inline-block;padding:4px 12px;border-radius:20px;margin-bottom:12px;">🟢 5スタンプ達成</div>
+        <img src="linecard-preview-5pt.png" alt="5スタンプ時のお客様画面" style="width:100%;border-radius:8px;display:block;">
+        <div style="margin-top:14px;">
+          <div style="font-size:12px;font-weight:700;color:#555;margin-bottom:6px;">この時点でもらえる特典（2種類）</div>
+          <div style="background:#fff;border:1px solid #c8e6c9;border-radius:8px;padding:10px 12px;margin-bottom:8px;font-size:13px;line-height:1.6;">
+            <span style="font-size:10px;font-weight:700;color:#2e7d32;background:#e8f5e9;padding:2px 7px;border-radius:10px;margin-right:6px;">通常特典</span>
+            お会計から <strong>500円OFF</strong>（GREEN特典）
+          </div>
+          <div style="background:#fff;border:1px solid #ffccbc;border-radius:8px;padding:10px 12px;font-size:13px;line-height:1.6;">
+            <span style="font-size:10px;font-weight:700;color:#c62828;background:#ffebee;padding:2px 7px;border-radius:10px;margin-right:6px;">+α 5月限定</span>
+            <strong>ドリンク無料</strong>（500円OFFとの併用OK）
+          </div>
+          <div style="margin-top:10px;font-size:12px;color:#c62828;font-weight:600;">→ スタンプ付与用QRをお客様に提示</div>
+        </div>
+      </div>
+
+      <!-- 10スタンプ＋15スタンプ -->
+      <div style="flex:1;min-width:260px;background:#f9f9f9;border-radius:12px;padding:16px;border:2px solid #ffcc80;">
+        <div style="font-size:12px;font-weight:700;letter-spacing:0.1em;color:#e65100;background:#fff3e0;display:inline-block;padding:4px 12px;border-radius:20px;margin-bottom:12px;">🟠 10スタンプ・15スタンプ達成</div>
+        <img src="linecard-preview-10pt.png" alt="10・15スタンプ時のお客様画面" style="width:100%;border-radius:8px;display:block;">
+        <div style="margin-top:14px;">
+          <div style="font-size:12px;font-weight:700;color:#555;margin-bottom:6px;">🎉 10スタンプ達成でもらえる特典（2種類）</div>
+          <div style="background:#fff;border:1px solid #ffe0b2;border-radius:8px;padding:10px 12px;margin-bottom:8px;font-size:13px;line-height:1.6;">
+            <span style="font-size:10px;font-weight:700;color:#e65100;background:#fff3e0;padding:2px 7px;border-radius:10px;margin-right:6px;">通常特典</span>
+            お好きなラーメン <strong>1杯無料</strong>（ORANGE特典）
+          </div>
+          <div style="background:#fff;border:1px solid #ffccbc;border-radius:8px;padding:10px 12px;font-size:13px;line-height:1.6;">
+            <span style="font-size:10px;font-weight:700;color:#c62828;background:#ffebee;padding:2px 7px;border-radius:10px;margin-right:6px;">+α 5月限定</span>
+            <strong>ラーメン1杯無料</strong>（通常特典との併用OK）
+          </div>
+          <div style="margin-top:8px;padding:8px 12px;background:#fff8e1;border-radius:8px;font-size:13px;font-weight:700;color:#e65100;">
+            ✅ 合計 ラーメン2杯分が無料になります！
+          </div>
+          <div style="margin-top:10px;font-size:12px;color:#c62828;font-weight:600;">→ スタンプ付与用QRをお客様に提示（画面に2つ表示されます）</div>
+        </div>
+
+        <!-- 15スタンプ -->
+        <div style="margin-top:20px;padding-top:16px;border-top:2px dashed #ffcc80;">
+          <div style="font-size:12px;font-weight:700;color:#555;margin-bottom:6px;">🔐 さらに15スタンプ達成で…</div>
+          <div style="background:#fff;border:1px solid #ef9a9a;border-radius:8px;padding:10px 12px;font-size:13px;line-height:1.6;">
+            <span style="font-size:10px;font-weight:700;color:#c62828;background:#ffebee;padding:2px 7px;border-radius:10px;margin-right:6px;">+α シークレット特典</span>
+            <strong>特製ラーメン無料</strong>
+          </div>
+          <div style="margin-top:8px;font-size:11px;color:#888;line-height:1.6;">お客様に聞かれたら「お楽しみに！」でOK。詳細は店長から案内あり。</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="callout" style="margin-top:18px;">
+      <strong>ポイント：</strong>通常特典と +α特典は<strong>同時取りOK</strong>です。お客様が5スタンプ・10スタンプに達した場合は、2種類ともご案内してください。「QRコードをスキャン」ボタンが出ていない場合は未達成です。判断に迷ったら岡さんへ。
     </div>
   </div>
 </section>
@@ -1263,12 +1482,102 @@
   </div>
 </section>
 
-<!-- SECTION 07: Staff Script -->
+<!-- SECTION 07: キャンペーン期間スタッフオペレーション -->
 <section id="s7">
+  <div class="wrap">
+    <div class="sec-icon-wrap"><svg class="icon"><use href="#i-bolt"/></svg></div>
+    <div class="sec-cap">STAFF OPERATION</div>
+    <span class="sec-num">SECTION 07</span>
+    <h2>キャンペーン期間のスタッフオペレーション</h2>
+
+    <div class="section-charge">
+      <div class="charge-imgs">
+        <div class="charge-img"><img src="member-oka.png" alt=""></div>
+      </div>
+      <span>オペレーション担当 <b>岡さん</b></span>
+    </div>
+
+    <p>クーポン利用のお客様がいらっしゃった際の、<strong>注文から会計まで</strong>の一連の流れです。ステップごとに確認してください。</p>
+
+    <h3 style="margin-top:32px;">注文までの流れ</h3>
+    <div class="steps" style="margin-top:12px;">
+      <div class="step">
+        <div class="step-num"></div>
+        <div class="step-body">
+          <h3>来店・クーポン確認</h3>
+          <p>クーポン利用の旨を言われたら、「<strong>LINEショップカードはご利用なさってますか？</strong>」と確認する。</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num"></div>
+        <div class="step-body">
+          <h3>未登録の場合 → LINEショップカードに誘導</h3>
+          <p>LINE友だち追加 → LINEショップカード登録に案内する。<br>
+          「<strong>クーポンを使用できるだけでなく、ご来店ごとにキャンペーン分のポイントも一緒に貯まって、ダブルでお得な特典がもらえます！</strong>」と補足説明を添える。</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num"></div>
+        <div class="step-body">
+          <h3>登録完了後のお礼</h3>
+          <p>「<strong>ご登録ありがとうございます</strong>」とお礼を伝える。</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num"></div>
+        <div class="step-body">
+          <h3>クーポン使用済みを目視確認</h3>
+          <p>登録してもらったら、クーポン使用画面で「<strong class="red">クーポン使用済</strong>」と目視確認する。</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num"></div>
+        <div class="step-body">
+          <h3>オーダー・提供・エアレジ割引対応</h3>
+          <p>オーダーを伺ってご提供。<strong>会計時までにエアレジで割引対応</strong>を済ませておく。</p>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="margin-top:40px;">会計時の確認ポイント</h3>
+    <div class="routine" style="margin-top:12px;">
+      <div class="routine-row">
+        <div class="routine-time"><span class="t">CHECK 1</span><span class="l">MUST</span></div>
+        <div class="routine-body">
+          <h3>割引が反映されているか確認</h3>
+          <p>エアレジで割引が適用されているかを目視確認してから会計へ進む。</p>
+        </div>
+      </div>
+      <div class="routine-row">
+        <div class="routine-time"><span class="t">CHECK 2</span><span class="l">MUST</span></div>
+        <div class="routine-body">
+          <h3>ポイント付与用QRでポイントを付与</h3>
+          <p>ポイント付与用のQR（<strong class="red">取扱要注意</strong>）でポイントを付与し、付与されているか目視で必ず確認する。<br>
+          <span style="font-size:12px;color:var(--gray-1);">※ ポイント付与用QRはiPad裏・各ハンディ裏に貼る予定。</span></p>
+        </div>
+      </div>
+      <div class="routine-row">
+        <div class="routine-time"><span class="t">CHECK 3</span><span class="l">CLOSING</span></div>
+        <div class="routine-body">
+          <h3>お帰り前にひと声</h3>
+          <p>「<strong>期間内であれば何度でも使用できます。来週は〇〇です。</strong>」とお帰りまでにご案内する。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="highlight" style="margin-top:24px;">
+      <div class="h-label"><svg class="icon"><use href="#i-bolt"/></svg>マインドセット</div>
+      <p>どんなに忙しくても、<strong class="red">ゆっくり目を見てお伝えすること。</strong>忙しさがお客様に伝わると雰囲気が崩れます。これだけは絶対に守ってください。</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 08: Staff Script -->
+<section id="s8">
   <div class="wrap">
     <div class="sec-icon-wrap"><svg class="icon"><use href="#i-play"/></svg></div>
     <div class="sec-cap">STAFF SCRIPT</div>
-    <span class="sec-num">SECTION 07</span>
+    <span class="sec-num">SECTION 08</span>
     <h2>接客トーク台本</h2>
 
     <div class="section-charge">
@@ -1296,8 +1605,7 @@
     <div class="card" style="margin-top:12px;border-left:4px solid var(--red);background:var(--red-soft);">
       <div style="font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--red);font-weight:700;margin-bottom:12px;">STEP 1 — 声かけ</div>
       <p style="font-size:15px;line-height:1.9;margin:0;">「ありがとうございます。<br>
-      今月、LINEのショップカードが始まりまして、<strong>今日登録するだけで今日分の特典がもらえます。</strong><br>
-      今週は <strong class="red">（今週の特典）</strong> になってるので、よければ今日どうぞ！」</p>
+      <strong>１周年を記念してLINEショップカードを始めました。</strong>今日登録するだけで<strong>今日分のポイントも貯まりますし、期間限定のクーポンも使用できます。</strong>よければ今日登録していきますか？」</p>
     </div>
 
     <div class="card" style="margin-top:12px;border-left:4px solid var(--ink);">
@@ -1336,12 +1644,12 @@
   </div>
 </section>
 
-<!-- SECTION 08 -->
-<section id="s8">
+<!-- SECTION 09 -->
+<section id="s9">
   <div class="wrap">
     <div class="sec-icon-wrap"><svg class="icon"><use href="#i-chat"/></svg></div>
     <div class="sec-cap">FAQ / FROM CUSTOMERS</div>
-    <span class="sec-num">SECTION 08</span>
+    <span class="sec-num">SECTION 09</span>
     <h2>よくある質問</h2>
 
     <div class="section-charge">
@@ -1371,7 +1679,7 @@
         <div class="qa-a"><span class="mark">A.</span><span><strong>味噌・辛味噌・醤油</strong> の3種類からお選びいただけます。看板メニューを1杯まるごとサービスです。</span></div>
       </div>
       <div class="qa-item">
-        <div class="qa-q"><span class="mark">Q.</span><span>RED（20スタンプ）とBLACK（30スタンプ）のトッピング無料の違いは？</span></div>
+        <div class="qa-q"><span class="mark">Q.</span><span>RED（15スタンプ）とBLACK（20スタンプ）のトッピング無料の違いは？</span></div>
         <div class="qa-a"><span class="mark">A.</span><span>どちらも <strong>1年間、毎回トッピング1品無料</strong>。違いは2つ：① 上限金額が <strong>RED: 180円 / BLACK: 300円</strong>、② BLACKのみ <strong class="red">他クーポンとの併用が可能</strong>。</span></div>
       </div>
       <div class="qa-item">

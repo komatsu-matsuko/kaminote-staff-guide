@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>麺昇 神の手｜アルバイトスタッフ キャンペーン運用ガイド</title>
+<style>
+  :root{
+    --red:      #C8102E;
+    --red-soft: #fff5f5;
+    --red-deep: #8B0000;
+    --ink:      #0A0A0A;
+    --ink-2:    #1F1F1F;
+    --ink-3:    #3D3D3D;
+    --gray-1:   #6B6B6B;
+    --gray-2:   #9A9A9A;
+    --gray-3:   #C9C9C9;
+    --gray-4:   #E4E4E4;
+    --gray-5:   #F0F0F0;
+    --bg:       #FAFAFA;
+    --white:    #FFFFFF;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{background:var(--bg);}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Noto Sans JP',sans-serif;
+    color:var(--ink-3);font-size:15px;line-height:1.75;
+    -webkit-font-smoothing:antialiased;
+  }
+  .page-wrap{max-width:760px;margin:0 auto;background:var(--white);border-left:1px solid var(--gray-4);border-right:1px solid var(--gray-4);}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px;}
+
+  /* HERO */
+  .hero{background:var(--ink);color:var(--white);padding:56px 0 48px;border-bottom:2px solid var(--ink);position:relative;overflow:hidden;}
+  .hero-caption{font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--gray-3);margin-bottom:20px;display:flex;align-items:center;gap:8px;}
+  .hero-caption::before{content:"";display:inline-block;width:32px;height:1px;background:var(--gray-2);}
+  .hero-title{font-size:28px;line-height:1.3;font-weight:800;color:var(--white);letter-spacing:0.01em;margin-bottom:16px;}
+  .hero-sub{font-size:14px;color:var(--gray-3);line-height:1.7;max-width:560px;}
+  .hero-meta{margin-top:36px;padding-top:24px;border-top:1px solid #2a2a2a;display:flex;flex-wrap:wrap;gap:24px 36px;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--gray-2);}
+  .hero-meta b{color:var(--white);font-weight:600;letter-spacing:0;text-transform:none;font-size:13px;display:block;margin-top:4px;}
+  .tonmana-badge{position:absolute;top:24px;right:20px;display:inline-flex;align-items:stretch;border:1.5px solid var(--white);border-radius:2px;overflow:hidden;font-size:10px;letter-spacing:0.12em;}
+  .tb-mark{background:var(--red);color:var(--white);padding:5px 8px;font-weight:700;}
+  .tb-name{background:transparent;color:var(--white);padding:5px 10px;font-weight:500;}
+
+  /* TOC */
+  .toc-wrap{background:var(--gray-5);border-bottom:1px solid var(--gray-4);padding:24px 0;}
+  .toc-label{font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--gray-1);margin-bottom:12px;}
+  .toc ol{padding-left:0;list-style:none;display:grid;gap:2px;}
+  .toc li{font-size:13px;border-bottom:1px solid var(--gray-4);}
+  .toc li:last-child{border-bottom:none;}
+  .toc a{color:var(--ink);text-decoration:none;font-weight:600;display:block;padding:8px 0;display:flex;align-items:center;gap:8px;}
+  .toc a:hover{color:var(--red);}
+  .toc-num{font-size:10px;font-family:'SF Mono','Consolas',monospace;color:var(--gray-2);letter-spacing:0.1em;width:28px;flex-shrink:0;}
+
+  /* SECTION */
+  section{padding:56px 0;border-bottom:1px solid var(--gray-4);}
+  section:last-of-type{border-bottom:0;}
+  .sec-num{display:inline-block;background:var(--red);color:var(--white);font-size:10px;letter-spacing:0.16em;font-weight:700;padding:5px 10px;margin-bottom:16px;border-radius:2px;}
+  .sec-cap{font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--gray-1);margin-bottom:8px;}
+  h2{font-size:22px;font-weight:800;color:var(--ink);line-height:1.4;letter-spacing:0;margin-bottom:18px;}
+  h3{font-size:15px;font-weight:700;color:var(--ink);line-height:1.5;margin:24px 0 10px;padding-bottom:8px;border-bottom:1px solid var(--gray-4);}
+  h3:first-child{margin-top:0;}
+  p{margin-bottom:14px;}
+  p:last-child{margin-bottom:0;}
+  strong{color:var(--ink);font-weight:700;}
+  .red{color:var(--red);font-weight:700;}
+  .lead{font-size:15px;line-height:1.85;color:var(--ink-2);border-left:4px solid var(--red);padding:4px 0 4px 18px;margin-bottom:28px;}
+
+  /* WEEK TABLE */
+  .weeks{display:grid;grid-template-columns:1fr;gap:0;margin-top:24px;border:1px solid var(--gray-4);border-bottom:0;}
+  .week{display:grid;grid-template-columns:64px 1fr;border-bottom:1px solid var(--gray-4);background:var(--white);}
+  .week-num{background:var(--ink);color:var(--white);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px 6px;}
+  .week-num .n{font-size:18px;font-weight:800;line-height:1;}
+  .week-num .l{font-size:9px;letter-spacing:0.14em;margin-top:4px;color:var(--gray-3);}
+  .week-body{padding:14px 16px;}
+  .week-date{font-size:11px;letter-spacing:0.14em;color:var(--gray-1);font-family:'SF Mono','Consolas',monospace;margin-bottom:4px;}
+  .week-title{font-size:16px;font-weight:800;color:var(--ink);margin-bottom:4px;}
+  .week-detail{font-size:13px;line-height:1.6;color:var(--ink-3);}
+  .week-alert{font-size:12px;color:var(--red);margin-top:6px;font-weight:600;}
+
+  /* RANK TABLE */
+  .ranks{display:grid;grid-template-columns:1fr;gap:0;border:1px solid var(--gray-4);border-bottom:0;background:var(--white);margin-top:8px;}
+  .rank{display:grid;grid-template-columns:72px 1fr;border-bottom:1px solid var(--gray-4);align-items:stretch;}
+  .rank-stamp{background:var(--gray-5);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px 6px;border-right:1px solid var(--gray-4);}
+  .rank-stamp .n{font-size:22px;font-weight:800;color:var(--ink);line-height:1;}
+  .rank-stamp .l{font-size:9px;letter-spacing:0.14em;color:var(--gray-1);margin-top:4px;}
+  .rank-body{padding:14px 16px;}
+  .rank-reward{font-size:14px;font-weight:800;color:var(--red);margin-bottom:2px;}
+  .rank-note{font-size:12px;color:var(--gray-1);margin-bottom:6px;}
+  .rank-how{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gray-1);margin-top:8px;margin-bottom:4px;}
+  .code-block{font-size:12px;background:var(--gray-5);border-left:3px solid var(--ink);padding:8px 12px;line-height:1.9;color:var(--ink-2);font-family:'SF Mono','Consolas',monospace;}
+
+  /* ALPHA TABLE */
+  .alpha-list{display:grid;grid-template-columns:1fr;gap:0;border:1px solid var(--gray-4);border-bottom:0;margin-top:8px;}
+  .alpha-item{border-bottom:1px solid var(--gray-4);background:var(--white);}
+  .alpha-head{background:var(--ink);color:var(--white);padding:10px 16px;display:flex;align-items:center;gap:14px;}
+  .alpha-head .pts{font-size:22px;font-weight:800;font-family:'SF Mono','Consolas',monospace;line-height:1;}
+  .alpha-head .info{flex:1;}
+  .alpha-head .tag{font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--gray-3);}
+  .alpha-head .title{font-size:13px;font-weight:700;color:var(--white);}
+  .alpha-body{padding:14px 16px;}
+  .alpha-reward{font-size:15px;font-weight:800;color:var(--red);margin-bottom:4px;}
+  .alpha-note{font-size:12px;color:var(--gray-1);margin-bottom:0;}
+
+  /* STEPS */
+  .steps{margin-top:8px;}
+  .step{display:grid;grid-template-columns:44px 1fr;gap:12px;padding:16px 0;border-bottom:1px dashed var(--gray-3);}
+  .step:last-child{border-bottom:0;}
+  .step-num{width:32px;height:32px;background:var(--ink);color:var(--white);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;font-family:'SF Mono','Consolas',monospace;flex-shrink:0;}
+  .step-title{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:4px;}
+  .step-note{font-size:13px;color:var(--ink-3);line-height:1.65;}
+  .step-warn{font-size:12px;color:var(--red);margin-top:4px;font-weight:600;}
+
+  /* FLOW DIAGRAM */
+  .flow{display:flex;flex-direction:column;align-items:center;gap:0;margin:20px 0;border:1px solid var(--gray-4);}
+  .flow-box{width:100%;padding:14px 18px;background:var(--white);font-size:13px;font-weight:700;color:var(--ink);border-bottom:1px solid var(--gray-4);text-align:center;}
+  .flow-box:last-child{border-bottom:none;}
+  .flow-box.start{background:var(--ink);color:var(--white);}
+  .flow-box.warn{background:var(--red-soft);color:var(--red);border-left:4px solid var(--red);}
+  .flow-arrow{background:var(--gray-5);text-align:center;padding:6px;font-size:16px;color:var(--gray-2);width:100%;border-bottom:1px solid var(--gray-4);}
+  .flow-branch{display:grid;grid-template-columns:1fr 1fr;width:100%;border-bottom:1px solid var(--gray-4);}
+  .flow-branch-item{padding:14px 12px;border-right:1px solid var(--gray-4);text-align:center;}
+  .flow-branch-item:last-child{border-right:none;}
+  .flow-branch-label{font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--gray-2);margin-bottom:6px;}
+  .flow-branch-title{font-size:13px;font-weight:700;color:var(--ink);line-height:1.5;}
+  .flow-branch-item.active{background:var(--ink);}
+  .flow-branch-item.active .flow-branch-label{color:var(--gray-3);}
+  .flow-branch-item.active .flow-branch-title{color:var(--white);}
+
+  /* HIGHLIGHT / CALLOUT */
+  .highlight{background:var(--red-soft);border-left:4px solid var(--red);padding:16px 20px;margin:20px 0;}
+  .highlight .h-label{font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--red);font-weight:700;margin-bottom:6px;}
+  .callout{background:var(--gray-5);border-left:4px solid var(--ink);padding:14px 18px;margin:16px 0;font-size:13.5px;line-height:1.75;color:var(--ink-2);}
+  .callout strong{color:var(--ink);}
+
+  /* WARNING */
+  .warn-block{background:var(--ink);color:var(--white);padding:20px;margin:20px 0;}
+  .warn-block .warn-title{font-size:14px;font-weight:800;color:var(--red);letter-spacing:0.08em;margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .warn-block ul{padding-left:16px;font-size:13px;line-height:2;}
+
+  /* TIP LIST */
+  .tip{background:var(--gray-5);border-left:4px solid var(--ink-3);padding:14px 18px;margin:16px 0;font-size:13px;line-height:1.8;}
+  .tip .tip-label{font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--gray-1);font-weight:700;margin-bottom:6px;}
+  .tip ul{padding-left:16px;}
+  .tip li{margin-bottom:2px;}
+
+  /* PHOTO */
+  .photo-block{margin:20px 0;border:1px solid var(--gray-4);background:var(--white);}
+  .photo-block img{display:block;width:100%;height:auto;}
+  .photo-cap{padding:8px 12px;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--gray-1);border-top:1px solid var(--gray-4);background:var(--gray-5);}
+  .photo-block.narrow{max-width:320px;margin-left:auto;margin-right:auto;}
+
+  /* DIVIDER */
+  .divider{height:1px;background:var(--gray-4);margin:28px 0;}
+
+  /* FOOTER */
+  footer{background:var(--ink);color:var(--gray-3);padding:40px 0;text-align:center;font-size:12px;line-height:2;}
+  footer strong{color:var(--white);}
+
+  @media(min-width:600px){
+    .weeks{grid-template-columns:1fr 1fr;}
+    .wrap{padding:0 32px;}
+  }
+</style>
+</head>
+<body>
+<div class="page-wrap">
+
+<!-- HERO -->
+<header class="hero">
+  <div class="tonmana-badge"><span class="tb-mark">TM</span><span class="tb-name">Hanse Mono</span></div>
+  <div class="wrap">
+    <div class="hero-caption">MENSHOW KAMINOTE / FOR PART-TIME STAFF</div>
+    <h1 class="hero-title">麺昇 神の手<br>アルバイト キャンペーン運用ガイド</h1>
+    <div class="hero-meta">
+      <div><span>Campaign</span><b>2026.05.04 – 05.31</b></div>
+      <div><span>For</span><b>アルバイトスタッフ</b></div>
+      <div><span>Contact</span><b>岡さん / 店長</b></div>
+    </div>
+  </div>
+</header>
+
+<!-- TOC -->
+<nav class="toc-wrap">
+  <div class="wrap">
+    <div class="toc-label">Contents</div>
+    <nav class="toc">
+      <ol>
+        <li><a href="#s1"><span class="toc-num">01</span>4週連続クーポン — 週ごとの内容</a></li>
+        <li><a href="#s2"><span class="toc-num">02</span>クーポンの取り扱い — レジ操作手順</a></li>
+        <li><a href="#s3"><span class="toc-num">03</span>ショップカード — ランク・特典一覧</a></li>
+        <li><a href="#s4"><span class="toc-num">04</span>5月限定 +α 特別特典</a></li>
+        <li><a href="#s5"><span class="toc-num">05</span>ショップカードQR 運用方法</a></li>
+      </ol>
+    </nav>
+  </div>
+</nav>
+
+<!-- S1 -->
+<section id="s1">
+  <div class="wrap">
+    <div class="sec-cap">SECTION 01 / COUPON OVERVIEW</div>
+    <div class="sec-num">4週連続クーポン</div>
+    <h2>週ごとの内容</h2>
+    <p class="lead">各週でクーポン内容が切り替わります。<strong>1日1回・期間中は何度でも利用可能</strong>。持ち帰り全弾対象外。</p>
+
+    <div class="weeks">
+      <div class="week">
+        <div class="week-num"><span class="n">1</span><span class="l">WEEK</span></div>
+        <div class="week-body">
+          <div class="week-date">5/4(月) — 5/10(日)</div>
+          <div class="week-title">ラーメン <span style="color:var(--red);">500円</span></div>
+          <div class="week-detail">辛味噌・味噌・醤油・まぜそば から1つ選択</div>
+        </div>
+      </div>
+      <div class="week">
+        <div class="week-num"><span class="n">2</span><span class="l">WEEK</span></div>
+        <div class="week-body">
+          <div class="week-date">5/11(月) — 5/17(日)</div>
+          <div class="week-title">餃子 <span style="color:var(--red);">無料</span></div>
+          <div class="week-detail">1組につき1日1回</div>
+          <div class="week-alert">⚠ 1組の会計1,000円以上が条件</div>
+        </div>
+      </div>
+      <div class="week">
+        <div class="week-num"><span class="n">3</span><span class="l">WEEK</span></div>
+        <div class="week-body">
+          <div class="week-date">5/18(月) — 5/24(日)</div>
+          <div class="week-title">火炎トッピング <span style="color:var(--red);">無料</span></div>
+          <div class="week-detail">1日1回</div>
+          <div class="week-alert">⚠ 辛味噌ラーメン注文の方のみ</div>
+        </div>
+      </div>
+      <div class="week">
+        <div class="week-num"><span class="n">4</span><span class="l">WEEK</span></div>
+        <div class="week-body">
+          <div class="week-date">5/25(月) — 5/31(日)</div>
+          <div class="week-title">ドリンク <span style="color:var(--red);">無料</span></div>
+          <div class="week-detail">通常・神メガ対象 / 1日1回</div>
+          <div class="week-alert">⚠ シャンパン・ショット・厳選ウィスキー・銘柄焼酎・日本酒は対象外</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top:20px;">
+      <strong>有効期限について</strong> — 切り替わりは0時ではなく<strong>その週の閉店時刻まで</strong>。深夜営業中も前の週のクーポンが使えます。
+    </div>
+    <div class="tip">
+      <div class="tip-label">共通ルール</div>
+      <ul>
+        <li>スクリーンショット提示はNG → 必ずLINEアプリの現物画面で確認</li>
+        <li><strong>テイクアウトは全弾対象外</strong>（店内飲食のみ）</li>
+        <li>期間外のクーポンは使用不可</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- S2 -->
+<section id="s2">
+  <div class="wrap">
+    <div class="sec-cap">SECTION 02 / REGISTER OPERATION</div>
+    <div class="sec-num">クーポンの取り扱い</div>
+    <h2>レジ操作 手順</h2>
+
+    <h3>第1弾 ― ラーメン500円クーポン</h3>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <div class="step-title">LINE登録 → クーポン獲得</div>
+          <div class="step-note">チラシのQRからLINE登録してもらい、クーポンを取得</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <div class="step-title">クーポン提示・使用確認</div>
+          <div class="step-note">お客様にクーポン画面を提示してもらい「使用する」を選択。使用できることを目視確認</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <div class="step-title">通常通り注文を取る</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <div class="step-title">レジで割引を適用</div>
+          <div class="step-note">卓番長押し → 該当ラーメンの割引額を選択</div>
+          <div class="code-block" style="margin-top:8px;">
+            辛味噌 → 580円引き<br>
+            味噌　 → 550円引き<br>
+            醤油　 → 480円引き<br>
+            まぜそば → 480円引き
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+    <h3>第2弾 ― 餃子無料クーポン</h3>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">第1弾と同じ（LINE登録 → クーポン取得）</div></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">第1弾と同じ（クーポン提示・使用確認）</div></div></div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <div class="step-title">注文時にレジで選択</div>
+          <div class="code-block" style="margin-top:6px;">［おすすめ］→「第2弾ギョーザ無料 5/11-17」を選択</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+    <h3>第3弾 ― 火炎トッピング無料クーポン</h3>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">第1弾と同じ（LINE登録 → クーポン取得）</div></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">第1弾と同じ（クーポン提示・使用確認）</div></div></div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <div class="step-title">通常手順で辛味噌を選択 → トッピングで選択</div>
+          <div class="code-block" style="margin-top:6px;">通常手順で辛味噌選択<br>→ トッピング欄「第3弾火炎無料 5/18-24」を選択</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+    <h3>第4弾 ― ドリンク無料クーポン</h3>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">第1弾と同じ（LINE登録 → クーポン取得）</div></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">第1弾と同じ（クーポン提示・使用確認）</div></div></div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <div class="step-title">注文時にレジで選択</div>
+          <div class="code-block" style="margin-top:6px;">［おすすめ］→「第4弾ドリンク無料 5/25-31」を選択</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+    <h3>LINE登録済みのお客様</h3>
+    <div class="callout">神の手のトーク画面を開いてもらい、配信されているクーポンを選択してもらう</div>
+
+    <div class="tip">
+      <div class="tip-label">クーポン対応 ポイント</div>
+      <ul>
+        <li>有効期限を確認する（期限は<strong>該当日の営業終了時刻まで</strong>）</li>
+        <li>目の前でお客様にクーポンを使ってもらう（コードを確認）</li>
+        <li>期間があることをお客様に念押し</li>
+        <li><strong>持ち帰り対象外</strong> / お会計ミスに注意</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- S3 -->
+<section id="s3">
+  <div class="wrap">
+    <div class="sec-cap">SECTION 03 / SHOP CARD RANKS</div>
+    <div class="sec-num">ショップカード</div>
+    <h2>ランク・特典一覧</h2>
+    <p class="lead">1来店ごとに1スタンプ。<strong>5・10・15・20スタンプ</strong>でランクアップし、それぞれ特典が付与されます。</p>
+
+    <div class="ranks">
+      <div class="rank">
+        <div class="rank-stamp"><span class="n">5</span><span class="l">GREEN</span></div>
+        <div class="rank-body">
+          <div class="rank-reward">お会計から 500円OFF</div>
+          <div class="rank-note">1,000円以上のお会計で利用可 / 有効期限：獲得から1ヶ月</div>
+          <div class="rank-how">利用方法</div>
+          <div style="font-size:12px;color:var(--ink-3);">レジにてお客様が画面提示 → お会計から500円引き<br><span style="color:var(--red);">※注文時に提示された場合はレジにて再度提示するよう案内</span></div>
+        </div>
+      </div>
+      <div class="rank">
+        <div class="rank-stamp"><span class="n">10</span><span class="l">ORANGE</span></div>
+        <div class="rank-body">
+          <div class="rank-reward">お好きなラーメン 1杯無料</div>
+          <div class="rank-note">味噌/辛味噌/醤油/まぜそばから1杯 / 大盛り無料対象外 / 有効期限：獲得から1ヶ月</div>
+          <div class="rank-how">利用方法</div>
+          <div style="font-size:12px;color:var(--ink-3);">レジにてお客様が画面提示 → 注文されたラーメンの値段分を値引き<br><span style="color:var(--red);">※トッピング・大盛りの追加料金は徴収</span></div>
+        </div>
+      </div>
+      <div class="rank">
+        <div class="rank-stamp"><span class="n">15</span><span class="l">RED</span></div>
+        <div class="rank-body">
+          <div class="rank-reward">1年間 毎回トッピング1品無料</div>
+          <div class="rank-note">上限200円 / スタンプが貯まり次第LINEクーポンQRを読み取ってもらう</div>
+          <div class="rank-how">レジ操作</div>
+          <div class="code-block">注文時に提示 → 通常手順で注文<br>→ トッピング欄「15スタンプ味玉」「15スタンプめんま」等を選択</div>
+        </div>
+      </div>
+      <div class="rank">
+        <div class="rank-stamp"><span class="n">20</span><span class="l">BLACK</span></div>
+        <div class="rank-body">
+          <div class="rank-reward">1年間 毎回トッピング1品無料 ＋ 他クーポン併用可</div>
+          <div class="rank-note">上限320円 / スタンプが貯まり次第LINEクーポンQRを読み取ってもらう</div>
+          <div class="rank-how">レジ操作</div>
+          <div class="code-block">注文時に提示 → 通常手順で注文<br>→ トッピング欄「20スタンプ味玉」「20スタンプチーズ」「20スタンプみだれ50」等を選択</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top:20px;">
+      <strong>15・20スタンプのLINEクーポン付与について</strong> — 獲得月の1日〜1年後の末日が有効期限。各月分のQRを順次発行予定。<strong>準備でき次第アナウンスあり。</strong>
+    </div>
+    <div class="tip">
+      <div class="tip-label">ショップカード ポイント</div>
+      <ul>
+        <li>ショップカードは<strong>期限なし</strong>で継続</li>
+        <li>お会計時にスタンプを貯めてもらえるよう<strong>必ず声がけ</strong></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- S4 -->
+<section id="s4">
+  <div class="wrap">
+    <div class="sec-cap">SECTION 04 / MAY LIMITED</div>
+    <div class="sec-num">5月限定 +α 特別特典</div>
+    <h2>プラス特典</h2>
+    <p class="lead">1周年感謝祭（5/4〜5/31）期間中のみ、通常ランク特典に<strong>加えて</strong>以下が同時にもらえます。<br>例：5スタンプ達成 → GREEN（500円OFF）＋ +α（ドリンク無料）の<strong>2種類同時取得</strong></p>
+
+    <div class="alpha-list">
+
+      <!-- 5スタンプ -->
+      <div class="alpha-item">
+        <div class="alpha-head">
+          <span class="pts">5</span>
+          <div class="info"><div class="tag">スタンプ達成 / +α 特典</div><div class="title">ドリンク無料</div></div>
+        </div>
+        <div class="alpha-body">
+          <div class="alpha-reward">ドリンク 無料</div>
+          <div class="alpha-note">対象ドリンクから1杯 / GREEN 500円OFFと<strong>併用OK</strong> / 有効期限：〜8/31</div>
+          <div class="photo-block narrow" style="margin-top:16px;">
+            <img src="linecard-preview-5pt.png" alt="5スタンプ時のLINE画面">
+            <div class="photo-cap">5スタンプ達成時のお客様画面 — 2種類のクーポンが表示される</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 10スタンプ -->
+      <div class="alpha-item">
+        <div class="alpha-head">
+          <span class="pts">10</span>
+          <div class="info"><div class="tag">計10スタンプ達成 / +α 特典</div><div class="title">ラーメン1杯無料</div></div>
+        </div>
+        <div class="alpha-body">
+          <div class="alpha-reward">ラーメン 1杯無料</div>
+          <div class="alpha-note">味噌/辛味噌/醤油/まぜそばから1杯 / 大盛り対象外 / ORANGE 1杯無料と<strong>併用OK → 合計2杯無料</strong> / 有効期限：〜8/31</div>
+          <div class="rank-how" style="margin-top:12px;">レジ操作 手順</div>
+          <div class="steps" style="margin-top:4px;">
+            <div class="step">
+              <div class="step-num">a</div>
+              <div class="step-body"><div class="step-note">通常と同じように注文を取る</div></div>
+            </div>
+            <div class="step">
+              <div class="step-num">b</div>
+              <div class="step-body">
+                <div class="step-note">レジにてお客様が画面提示</div>
+                <div class="step-warn">※注文時に提示された場合はレジにて再度提示するよう案内</div>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">c</div>
+              <div class="step-body">
+                <div class="step-note">お会計から注文されたラーメンの値段分を値引き</div>
+                <div class="step-warn">※トッピング・大盛りの追加料金は徴収</div>
+              </div>
+            </div>
+          </div>
+          <div class="photo-block narrow" style="margin-top:16px;">
+            <img src="linecard-preview-10pt.png" alt="10スタンプ時のLINE画面">
+            <div class="photo-cap">10スタンプ達成時のお客様画面 — ラーメン無料クーポンが2枚・QRが2つ表示</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 15スタンプ -->
+      <div class="alpha-item">
+        <div class="alpha-head">
+          <span class="pts">15</span>
+          <div class="info"><div class="tag">計15スタンプ達成 / +α シークレット</div><div class="title">特製ラーメン無料</div></div>
+        </div>
+        <div class="alpha-body">
+          <div class="alpha-reward">特製ラーメン 無料</div>
+          <div class="alpha-note">告知ポスターでは内容を伏せています。お客様に聞かれたら「お楽しみに！」でOK</div>
+          <div class="rank-how" style="margin-top:12px;">レジ操作</div>
+          <div class="code-block" style="margin-top:4px;">［おすすめ］→「周年スタンプ シークレット特製ラーメン」を選択</div>
+        </div>
+      </div>
+
+    </div>
+
+    <h3 style="margin-top:32px;">+α クーポンの取り扱い</h3>
+    <p style="font-size:13px;color:var(--ink-3);">ショップカードのスタンプ数を確認し、規定数に達していたらQRを読み取ってもらいクーポンを付与する。</p>
+    <div class="photo-block" style="margin-top:16px;">
+      <img src="photo-qr-cards.png" alt="5・10・15ポイント QRカード">
+      <div class="photo-cap">スタンプ付与用QRカード（5・10・15ポイント）</div>
+    </div>
+
+    <div class="tip">
+      <div class="tip-label">+α 特典 ポイント</div>
+      <ul>
+        <li>5月期間中に獲得した特典は<strong>8/31まで</strong>利用できる</li>
+        <li>通常特典と+αは<strong>同時取りOK</strong></li>
+        <li>お会計時にスタンプ数を確認し、特典があれば積極的に案内する</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- S5 -->
+<section id="s5">
+  <div class="wrap">
+    <div class="sec-cap">SECTION 05 / QR OPERATION</div>
+    <div class="sec-num">ショップカードQR</div>
+    <h2>運用方法</h2>
+
+    <h3>QRは2種類 — 絶対に混同しない</h3>
+
+    <div style="border:1px solid var(--gray-4);border-bottom:0;margin-bottom:20px;">
+      <div style="display:grid;grid-template-columns:100px 1fr;border-bottom:1px solid var(--gray-4);">
+        <div style="background:var(--gray-5);padding:14px 12px;font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--gray-1);border-right:1px solid var(--gray-4);display:flex;align-items:center;">発行用QR</div>
+        <div style="padding:14px 16px;font-size:13px;line-height:1.7;color:var(--ink-3);">ショップカードを<strong>発行</strong>するためのQR。チラシ・店内に貼ってある。<strong>持ち出し・読み取り自由。</strong></div>
+      </div>
+      <div style="display:grid;grid-template-columns:100px 1fr;border-bottom:1px solid var(--gray-4);">
+        <div style="background:var(--red);padding:14px 12px;font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--white);border-right:1px solid var(--red);display:flex;align-items:center;">⚠ 付与用QR</div>
+        <div style="padding:14px 16px;font-size:13px;line-height:1.7;color:var(--ink-3);border-left:4px solid var(--red);">お会計後にスタンプを<strong>付与</strong>するためのQR。<strong>会計用iPadの裏に貼ってある</strong>。混雑時はレジ上の鍵入れから取り出す。</div>
+      </div>
+    </div>
+
+    <div class="warn-block">
+      <div class="warn-title">⚠ スタンプ付与用QR 厳守事項</div>
+      <ul>
+        <li>持ち出し NG</li>
+        <li>レジ横・卓上への貼り出し NG</li>
+        <li>お客様に撮影させない</li>
+        <li>外部に流出するとスタンプ押し放題になってしまう！</li>
+      </ul>
+    </div>
+
+    <h3>レジでの対応フロー</h3>
+    <div class="flow">
+      <div class="flow-box start">会計時「LINEショップカードはお持ちですか？」</div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-branch">
+        <div class="flow-branch-item">
+          <div class="flow-branch-label">未登録</div>
+          <div class="flow-branch-title">チラシの登録用QRをお渡し<br>「友だち追加するだけで発行されます」</div>
+        </div>
+        <div class="flow-branch-item active">
+          <div class="flow-branch-label">登録済み</div>
+          <div class="flow-branch-title">スタンプ付与用QRを提示<br>→ お客様がLINEで読み取る</div>
+        </div>
+      </div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-box">「スタンプが追加されました」を<strong>目視確認</strong></div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-box">QRをすぐに元の場所へ戻す</div>
+    </div>
+
+    <div class="divider"></div>
+    <h3>初回登録のお客様</h3>
+    <div class="callout">
+      <strong>ボーナススタンプ付与</strong> — 初回登録で<strong>2個スタンプが貯まる</strong>状態になる。「初めてのご登録ありがとうございます」のひと言を忘れずに。
+    </div>
+
+    <div class="photo-block" style="margin-top:20px;">
+      <img src="photo-shopsetup.png" alt="店舗のQR設置状況">
+      <div class="photo-cap">店舗の設置状況 — 登録用チラシ・ポスター</div>
+    </div>
+
+    <div class="tip">
+      <div class="tip-label">QR運用 ポイント</div>
+      <ul>
+        <li><strong>発行用とスタンプ付与用を絶対に混同しない</strong></li>
+        <li>スタンプ付与用QRを外部に流出させない・撮影させない</li>
+        <li>ショップカードの特典をお客様に積極的にアピールする</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <strong>麺昇 神の手 中野店</strong><br>
+    アルバイトスタッフ キャンペーン運用ガイド — 1周年感謝祭 2026.05.04 – 05.31<br><br>
+    不明点は <strong>岡さん</strong> または <strong>店長</strong> に確認してください
+  </div>
+</footer>
+
+</div><!-- /page-wrap -->
+</body>
+</html>
